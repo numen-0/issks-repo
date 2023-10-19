@@ -1,0 +1,52 @@
+# Python 3 code to demonstrate the
+# working of MD5 (byte - byte)
+ 
+import hashlib
+
+#bilatzenHash = input("Sartu bilatu nahi duzu hash: ")
+bilatzenHash = "e5ed313192776744b9b93b1320b5e268"
+dokumentuIzena = ""
+
+for i in range(1,47):
+    oraingoHash = hashlib.md5(open('C:\\Users\\tgiker\Downloads\irudia\imagen'+str(i)+'.jpg','rb').read()).hexdigest()
+    if (oraingoHash == bilatzenHash):
+        print('Hash lortuta! ' + oraingoHash)
+        dokumentuIzena = 'imagen' + str(i) + '.jpg'
+        print(dokumentuIzena)
+        break
+
+
+
+temp = 7
+bitAcual = 0
+num = 0
+hitzKopMax = 1
+mezua = ""
+
+print("PROZESUA HASTEN")
+
+for byte in open('C:\\Users\\tgiker\Downloads\irudia\\' + dokumentuIzena,'rb').read():
+    
+    if temp < 0:
+        temp = 7
+        #print(num)
+        #print(chr(num))
+        mezua += chr(num)
+        num = 0
+        #hitzKopMax -= 1
+        if (hitzKopMax <= 0):
+            break
+
+    if byte & 1:
+        bitAcual = 1
+    else:
+        bitAcual = 0
+
+    num = num + (bitAcual * (2 ** temp))
+    temp -= 1
+    
+print(mezua)
+
+print("AMAIERA")
+
+
